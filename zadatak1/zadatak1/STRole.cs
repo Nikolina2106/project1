@@ -4,7 +4,7 @@ using System.Text;
 
 namespace zadatak1
 {
-    class STRole : RoleProperties
+    public class STRole : RoleProperties
     {
         public string Project { get; set; }
         public bool UsesAutomatedTest { get; set; }
