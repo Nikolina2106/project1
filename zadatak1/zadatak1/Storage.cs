@@ -4,9 +4,9 @@ using System.Text;
 
 namespace zadatak1
 {
-    public abstract class Storage : RoleProperties
+    public class Storage : RoleProperties
     {
-        InMemoryList memoryList= new InMemoryList();
+        public List<RoleProperties> MyList { get; set; }
         
 
         //add, remove, display, list, <role_name>List
@@ -15,29 +15,23 @@ namespace zadatak1
             Console.WriteLine("Available commands: Add, Remove, Display, List, <role_name>List");
         }
 
-        public abstract void STSpecificAdd(STRole item);
-        public abstract void DEVSpecificAdd(DEVRole item);
-        public abstract void DSNSpecificAdd(DSNRole item);
-        public abstract void CEOSpecificAdd(CEORole item);
-        public abstract void PMSpecificAdd(PMRole item);
-
         public void Add(RoleProperties item)
         {
-            Console.Write("Role:");
-            Role = Console.ReadLine();
-            if(Role=="CEO")
-            {
-                Console.Write("CEOYears:");
-                Console.ReadLine();
-            }
+            //Console.Write("Role:");
+            //Role = Console.ReadLine();
+            //if(Role=="CEO")
+            //{
+            //    Console.Write("CEOYears:");
+            //    Console.ReadLine();
+            //}
 
             
-            memoryList.MyList.Add(item); 
+            MyList.Add(item); 
 
         }
         public void Remove(RoleProperties item)
         {
-            memoryList.MyList.Remove(item);
+            MyList.Remove(item);
         }
         public void Display()
         {
