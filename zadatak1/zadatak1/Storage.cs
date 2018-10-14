@@ -4,9 +4,10 @@ using System.Text;
 
 namespace zadatak1
 {
-    public class Storage : RoleProperties
+    public class Storage 
     {
-        public List<RoleProperties> MyList { get; set; }
+        public List<RoleProperties> MyList = new List<RoleProperties>();
+
         
 
         //add, remove, display, list, <role_name>List
@@ -16,18 +17,8 @@ namespace zadatak1
         }
 
         public void Add(RoleProperties item)
-        {
-            //Console.Write("Role:");
-            //Role = Console.ReadLine();
-            //if(Role=="CEO")
-            //{
-            //    Console.Write("CEOYears:");
-            //    Console.ReadLine();
-            //}
-
-            
+        {            
             MyList.Add(item); 
-
         }
         public void Remove(RoleProperties item)
         {

@@ -19,9 +19,12 @@ namespace zadatak1
             Console.Write("Last name: ");
             model.LastName=Console.ReadLine();
             Console.Write("Age: ");
-            model.Age=Console.ReadLine();
+            model.Age=Convert.ToInt32(Console.ReadLine());
 
             AddSpecific(model);
+
+            storage.Add(model);
+            
         }
 
         public abstract void AddSpecific(T item);

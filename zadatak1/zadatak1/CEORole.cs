@@ -6,6 +6,6 @@ namespace zadatak1
 {
     public class CEORole : RoleProperties
     {
-        public string CeoYears { get; set; }
+        public int CeoYears { get; set; }
     }
 }
