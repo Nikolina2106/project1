@@ -6,7 +6,7 @@ namespace zadatak1
 {
     public abstract class BaseService<T> where T : RoleProperties, new()
     {
-        protected Storage storage = new Storage();
+        //protected Storage storage;
 
         public void Add()
         {
@@ -23,7 +23,7 @@ namespace zadatak1
 
             AddSpecific(model);
 
-            storage.Add(model);
+            Storage.Instance.Add(model);
             
         }
 

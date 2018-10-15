@@ -4,10 +4,10 @@ using System.Text;
 
 namespace zadatak1
 {
-    public class PmService : BaseService<PMRole>
+    public class PmService : BaseService<PmRole>
 
     {
-        public override void AddSpecific(PMRole pmrole)
+        public override void AddSpecific(PmRole pmrole)
         {
             pmrole.Role = "pmrole";
             Console.Write("Project: ");

@@ -4,9 +4,9 @@ using System.Text;
 
 namespace zadatak1
 {
-    public class DevService : BaseService<DEVRole>
+    public class DevService : BaseService<DevRole>
     {
-        public override void AddSpecific(DEVRole devrole)
+        public override void AddSpecific(DevRole devrole)
         {
             devrole.Role = "devrole";
             Console.Write("Project: ");

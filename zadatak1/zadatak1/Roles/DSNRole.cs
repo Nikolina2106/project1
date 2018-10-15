@@ -4,9 +4,9 @@ using System.Text;
 
 namespace zadatak1
 {
-    public class DEVRole : RoleProperties
+    public class DsnRole : RoleProperties
     {
         public string Project { get; set; }
-        public bool IsStudent { get; set; }
+        public bool CanDraw { get; set; }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace zadatak1
 {
-    public class PMRole : RoleProperties
+    public class PmRole : RoleProperties
     {
         public string Project;
     }

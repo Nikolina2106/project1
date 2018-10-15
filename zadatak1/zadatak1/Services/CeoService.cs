@@ -4,9 +4,9 @@ using System.Text;
 
 namespace zadatak1
 {
-    public class CeoService : BaseService<CEORole>
+    public class CeoService : BaseService<CeoRole>
     {
-        public override void AddSpecific(CEORole ceorole)
+        public override void AddSpecific(CeoRole ceorole)
         {
             ceorole.Role = "ceo";
             Console.Write("CEOYears: ");

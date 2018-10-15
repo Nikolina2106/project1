@@ -4,11 +4,11 @@ using System.Text;
 
 namespace zadatak1
 {
-    public class StService : BaseService<STRole>
+    public class StService : BaseService<StRole>
     {
-        public override void AddSpecific(STRole strole)
+        public override void AddSpecific(StRole strole)
         {
-            strole.Role = "strole";
+            strole.Role = "st";
             Console.Write("Project: ");
             strole.Project = Console.ReadLine();
             Console.Write("UsesAutomatedTest: ");

@@ -4,11 +4,11 @@ using System.Text;
 
 namespace zadatak1
 {
-    public class DsnService : BaseService<DSNRole>
+    public class DsnService : BaseService<DsnRole>
     {
-        public override void AddSpecific(DSNRole dsnrole)
+        public override void AddSpecific(DsnRole dsnrole)
         {
-            dsnrole.Role = "dsnrole";
+            dsnrole.Role = "dsn";
             Console.Write("Project: ");
             dsnrole.Project = Console.ReadLine();
             Console.Write("CanDraw: ");
