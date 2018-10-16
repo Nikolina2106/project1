@@ -11,8 +11,7 @@ namespace zadatak1
             strole.Role = "st";
             Console.Write("Project: ");
             strole.Project = Console.ReadLine();
-            Console.Write("UsesAutomatedTest: ");
-            strole.UsesAutomatedTest = Convert.ToBoolean(Console.ReadLine());
+            strole.UsesAutomatedTest = Helper.ParseBoolInput("UsesAutomatedTest: ");
         }
 
         public override void Display()

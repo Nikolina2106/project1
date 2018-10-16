@@ -11,8 +11,7 @@ namespace zadatak1
             dsnrole.Role = "dsn";
             Console.Write("Project: ");
             dsnrole.Project = Console.ReadLine();
-            Console.Write("CanDraw: ");
-            dsnrole.CanDraw = Convert.ToBoolean(Console.ReadLine());
+            dsnrole.CanDraw = Helper.ParseBoolInput("CanDraw: ");
         }
 
         public override void Display()

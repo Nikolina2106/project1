@@ -5,7 +5,6 @@ namespace zadatak1
 {
     class Program
     {
-
         static void Main(string[] args)
         {
             CeoService ceoService = new CeoService();
@@ -15,27 +14,27 @@ namespace zadatak1
             DevService devService = new DevService();
 
 
-            Console.WriteLine("Available commands: Add, Remove, Display, List, <role_name>List");
+            Console.WriteLine("Available commands: Add, Remove, Display, List, <role_name>List, Help, Exit");
+            
             while (true)
             {
                 Console.Write("Command: ");
-
                 var command = Console.ReadLine();
-
+                string role;
             
                 if(command.ToLower() =="add")
                 {
-                 
-                    Console.Write("Role: ");
-                    var role = Console.ReadLine();
-
-                    //pretraži ceo
-                    var ndceo=Storage.Instance.MyList.Where(roles => roles.Role == "ceo").FirstOrDefault();
-
+                   
+                    do
+                    {
+                        Console.Write("Role: ");
+                        role = Console.ReadLine();
+                    }
+                    while (role.ToLower() != "ceo" && role.ToLower()!="pm" && role.ToLower() != "dev" && role.ToLower() != "dsn" && role.ToLower() != "st");
                     switch (role.ToLower())
                     {
                         case "ceo":
-                            if(ndceo==null)
+                            if(Storage.Instance.CheckIfCeoExist()==false)
                             {
                                 ceoService.Add();
                             }
@@ -61,40 +60,37 @@ namespace zadatak1
                 }
                 else if (command.ToLower() == "help")
                 {
-                    Console.WriteLine("Available commands: Add, Remove, Display, List, <role_name>List");
+                    Console.WriteLine("Available commands: \n" +
+                        "Help - displays available commands \n" +
+                        "Add – used for adding new employee Remove \n" +
+                        "Display - used to display all employees(including you!) with their basic info \n" +
+                        "List - used to display all employees(excluding you!) with their basic info \n" +
+                        "<role_name>List - used to display all emplyees in a role (e.g. PMLIST – displays all project managers)" +
+                        "with their full info \n" +
+                        "Exit - used to terminate program \n");
                 }
-                else if(command.ToLower()=="remove")
+
+                else if (command.ToLower() == "remove")
                 {
-                    Console.Write("Enter last name of employee you want to remove from list: ");
-                    var removelastname = Console.ReadLine();
-
-                    var remlastname = Storage.Instance.MyList.Where(roles => roles.LastName == removelastname).FirstOrDefault();
-                    Storage.Instance.MyList.Remove(remlastname);
-
-
+                    Storage.Instance.Remove();
                 }
+
                 else if(command.ToLower()=="display")
                 {
-                    foreach (RoleProperties displaylist in Storage.Instance.MyList)
-                    {
-                        Console.WriteLine("Role: {0}, First name: {1}, Last name: {2}, Age: {3}", displaylist.Role, 
-                            displaylist.FirstName, displaylist.LastName, displaylist.Age);
-                    }
-
+                    Storage.Instance.Display();
                 }
                 else if(command.ToLower()=="list")
                 {
-
+                    Storage.Instance.List();
+                }
+                else if(command.ToLower()=="exit")
+                {
+                    return;
                 }
 
             }
         }
-
-        //public STRole stRole = new STRole();
-        //public DEVRole devRole = new DEVRole();
-        //public CEORole ceoRole = new CEORole();
-        //public DSNRole dsnRole = new DSNRole();
-        //public PMRole pmRole = new PMRole();
+        
                
     }
 

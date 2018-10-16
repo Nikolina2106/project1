@@ -6,11 +6,12 @@ namespace zadatak1
 {
     public class CeoService : BaseService<CeoRole>
     {
-        public override void AddSpecific(CeoRole ceorole)
+        
+
+        public override void AddSpecific(CeoRole ceoRole)
         {
-            ceorole.Role = "ceo";
-            Console.Write("CEOYears: ");
-            ceorole.CeoYears = Convert.ToInt32(Console.ReadLine());
+            ceoRole.Role = "ceo";
+            ceoRole.CeoYears = Helper.ParseUserInput("CeoYears: ");
         }
 
         public override void Display()

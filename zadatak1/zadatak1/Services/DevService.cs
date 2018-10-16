@@ -6,13 +6,13 @@ namespace zadatak1
 {
     public class DevService : BaseService<DevRole>
     {
-        public override void AddSpecific(DevRole devrole)
+        public override void AddSpecific(DevRole devRole)
         {
-            devrole.Role = "devrole";
+            devRole.Role = "dev";
             Console.Write("Project: ");
-            devrole.Project = Console.ReadLine();
-            Console.Write("IsStudent: ");
-            devrole.IsStudent = Convert.ToBoolean(Console.ReadLine());
+            devRole.Project = Console.ReadLine();
+            devRole.IsStudent = Helper.ParseBoolInput("IsStudent: ");
+            
         }
 
         public override void Display()
