@@ -13,28 +13,49 @@ namespace zadatak1
             DsnService dsnService = new DsnService();
             DevService devService = new DevService();
 
+            ListAccessMethod listAccessMethod = new ListAccessMethod();
 
+            
             Console.WriteLine("Available commands: Add, Remove, Display, List, <role_name>List, Help, Exit");
             
             while (true)
             {
-                Console.Write("Command: ");
-                var command = Console.ReadLine();
+                string command;
+                do
+                {
+                    Console.Write("Command: ");
+                    command = Console.ReadLine();
+                    if(command.ToLower() != "add" && command.ToLower() != "remove" && command.ToLower() != "display" && command.ToLower() != "list" && command.ToLower() != "help"
+                            && command.ToLower() != "pmlist" && command.ToLower() != "ceolist" && command.ToLower() != "stlist" && command.ToLower() != "devlist"
+                            && command.ToLower() != "dsnlist" && command.ToLower() != "exit")
+                    {
+                        Console.WriteLine("Wrong input. Check Help for possible commands.");
+                    }
+                }
+                while (command.ToLower() != "add" && command.ToLower() != "remove" && command.ToLower() != "display" && command.ToLower() != "list" && command.ToLower() != "help"
+                            && command.ToLower() != "pmlist" && command.ToLower() != "ceolist" && command.ToLower() != "stlist" && command.ToLower() != "devlist"
+                            && command.ToLower() != "dsnlist" && command.ToLower() != "exit");
+
                 string role;
             
                 if(command.ToLower() =="add")
                 {
-                   
                     do
                     {
                         Console.Write("Role: ");
                         role = Console.ReadLine();
+
+                        if(role.ToLower() != "ceo" && role.ToLower() != "pm" && role.ToLower() != "dev" && role.ToLower() != "dsn" && role.ToLower() != "st")
+                        {
+                            Console.WriteLine("Wrong input. Possible roles are: CEO, PM, DEV, DSN and ST.");
+                        }
                     }
-                    while (role.ToLower() != "ceo" && role.ToLower()!="pm" && role.ToLower() != "dev" && role.ToLower() != "dsn" && role.ToLower() != "st");
+                    while (role.ToLower() != "ceo" && role.ToLower() != "pm" && role.ToLower() != "dev" && role.ToLower() != "dsn" && role.ToLower() != "st");
+
                     switch (role.ToLower())
                     {
                         case "ceo":
-                            if(Storage.Instance.CheckIfCeoExist()==false)
+                            if(ceoService.SearchCeo()==false)
                             {
                                 ceoService.Add();
                             }
@@ -77,7 +98,7 @@ namespace zadatak1
 
                 else if(command.ToLower()=="display")
                 {
-                    Storage.Instance.Display();
+                    listAccessMethod.Display();
                 }
                 else if(command.ToLower()=="list")
                 {

@@ -6,8 +6,6 @@ namespace zadatak1
 {
     public class CeoService : BaseService<CeoRole>
     {
-        
-
         public override void AddSpecific(CeoRole ceoRole)
         {
             ceoRole.Role = "ceo";
@@ -16,7 +14,14 @@ namespace zadatak1
 
         public override void Display()
         {
-            
+
         }
+
+        public bool SearchCeo()
+        {
+            bool searchCeo = Storage.Instance.CheckIfCeoExist();
+            return searchCeo;
+        }
+
     }
 }

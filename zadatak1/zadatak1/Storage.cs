@@ -22,13 +22,7 @@ namespace zadatak1
         }
 
         private List<RoleProperties> MyList = new List<RoleProperties>();
-
-        /*public List<RoleProperties> MyListAccess
-        {
-            //neštozapristup
-        }*/
         
-
         //add, remove, display, list, <role_name>List
         public void Help()
         {
@@ -38,7 +32,8 @@ namespace zadatak1
         public void Add(RoleProperties item)
         {
             MyList.Add(item); 
-         }
+        }
+
         public void Remove()
         {
             Console.Write("Enter last name of employee you want to remove from list: ");
@@ -47,6 +42,7 @@ namespace zadatak1
             var remLastname = MyList.Where(roles => roles.LastName == removeLastname).FirstOrDefault();
             MyList.Remove(remLastname);
         }
+
         public void Display()
         {
             foreach (RoleProperties displayItem in MyList)
@@ -55,6 +51,7 @@ namespace zadatak1
                     displayItem.FirstName, displayItem.LastName, displayItem.Age);
             }
         }
+
         public void List()
         {
             foreach(RoleProperties listItem in MyList.Where(item => item.Role != "ceo"))
@@ -63,6 +60,7 @@ namespace zadatak1
                     listItem.FirstName, listItem.LastName, listItem.Age);
             }
         }
+
         public void RoleNameList()
         {
             Console.Write("Enter role name of employees you want to display: ");
@@ -76,12 +74,11 @@ namespace zadatak1
             
         }
 
-
         //Ceo search
         public bool CheckIfCeoExist()
         {
             bool ceoExistance;
-            var ceoExistanceCheck=Storage.Instance.MyList.Where(roles => roles.Role == "ceo").FirstOrDefault();
+            var ceoExistanceCheck=MyList.Where(roles => roles.Role == "ceo").FirstOrDefault();
             if(ceoExistanceCheck==null)
             {
                 ceoExistance = false;
