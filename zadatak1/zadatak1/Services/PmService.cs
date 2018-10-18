@@ -14,7 +14,7 @@ namespace zadatak1
             pmrole.Project = Console.ReadLine();
         }
 
-        public override void Display()
+        public override void SpecificDisplay()
         {
             throw new NotImplementedException();
         }

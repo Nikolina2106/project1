@@ -25,7 +25,7 @@ namespace zadatak1
         }
 
         public abstract void AddSpecific(T item);
-        public abstract void Display();
+        public abstract void SpecificDisplay();
 
         
 

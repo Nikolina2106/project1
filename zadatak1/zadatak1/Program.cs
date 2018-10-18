@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Linq;
+using zadatak1.Services;
 
 namespace zadatak1
 {
     class Program
     {
+        
+
         static void Main(string[] args)
         {
             CeoService ceoService = new CeoService();
@@ -13,9 +16,10 @@ namespace zadatak1
             DsnService dsnService = new DsnService();
             DevService devService = new DevService();
 
-            ListAccessMethod listAccessMethod = new ListAccessMethod();
+            ListDisplayMethod listDisplayMethod = new ListDisplayMethod();
+            CommonService commonService = new CommonService();
+                         
 
-            
             Console.WriteLine("Available commands: Add, Remove, Display, List, <role_name>List, Help, Exit");
             
             while (true)
@@ -79,6 +83,7 @@ namespace zadatak1
                     }
                 
                 }
+
                 else if (command.ToLower() == "help")
                 {
                     Console.WriteLine("Available commands: \n" +
@@ -90,20 +95,25 @@ namespace zadatak1
                         "with their full info \n" +
                         "Exit - used to terminate program \n");
                 }
-
+                
                 else if (command.ToLower() == "remove")
                 {
-                    Storage.Instance.Remove();
+                    Console.Write("Enter last name of employee you want to remove from list: ");
+                    string removeLastname = Console.ReadLine();
+                    commonService.Remove(removeLastname);
+                    //display pa remove
                 }
 
                 else if(command.ToLower()=="display")
                 {
-                    listAccessMethod.Display();
+                    Storage.Instance.Display();
                 }
+
                 else if(command.ToLower()=="list")
                 {
                     Storage.Instance.List();
                 }
+
                 else if(command.ToLower()=="exit")
                 {
                     return;

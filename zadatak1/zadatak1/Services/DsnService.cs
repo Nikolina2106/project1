@@ -14,7 +14,7 @@ namespace zadatak1
             dsnrole.CanDraw = Helper.ParseBoolInput("CanDraw: ");
         }
 
-        public override void Display()
+        public override void SpecificDisplay()
         {
             throw new NotImplementedException();
         }

@@ -14,7 +14,7 @@ namespace zadatak1
             strole.UsesAutomatedTest = Helper.ParseBoolInput("UsesAutomatedTest: ");
         }
 
-        public override void Display()
+        public override void SpecificDisplay()
         {
             throw new NotImplementedException();
         }

@@ -15,7 +15,7 @@ namespace zadatak1
             
         }
 
-        public override void Display()
+        public override void SpecificDisplay()
         {
             throw new NotImplementedException();
         }

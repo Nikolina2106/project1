@@ -12,8 +12,9 @@ namespace zadatak1
             ceoRole.CeoYears = Helper.ParseUserInput("CeoYears: ");
         }
 
-        public override void Display()
+        public override void SpecificDisplay()
         {
+
 
         }
 

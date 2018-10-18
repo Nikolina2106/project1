@@ -7,6 +7,7 @@ namespace zadatak1
 {
     public class Storage
     {
+
         protected static Storage instance;
         private Storage() { }
         public static Storage Instance
@@ -24,27 +25,19 @@ namespace zadatak1
         private List<RoleProperties> MyList = new List<RoleProperties>();
         
         //add, remove, display, list, <role_name>List
-        public void Help()
-        {
-            Console.WriteLine("Available commands: Add, Remove, Display, List, <role_name>List");
-        }
-
         public void Add(RoleProperties item)
         {
             MyList.Add(item); 
         }
 
-        public void Remove()
+        public void Remove(string removeLastName)
         {
-            Console.Write("Enter last name of employee you want to remove from list: ");
-            var removeLastname = Console.ReadLine();
-
-            var remLastname = MyList.Where(roles => roles.LastName == removeLastname).FirstOrDefault();
-            MyList.Remove(remLastname);
+            MyList.Remove(MyList.Where(roles => roles.LastName == removeLastName).FirstOrDefault());
         }
 
         public void Display()
         {
+            //List<RoleProperties> result = MyList.CommonService.FindAll();
             foreach (RoleProperties displayItem in MyList)
             {
                 Console.WriteLine("Role: {0}, First name: {1}, Last name: {2}, Age: {3}", displayItem.Role,
@@ -84,7 +77,7 @@ namespace zadatak1
                 ceoExistance = false;
             }
             else
-                {
+            {
                 ceoExistance = true;
             }
             return ceoExistance;
