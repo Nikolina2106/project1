@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace zadatak1
 {
@@ -34,53 +35,20 @@ namespace zadatak1
         {
             MyList.Remove(MyList.Where(roles => roles.LastName == removeLastName).FirstOrDefault());
         }
-
-        public void Display()
+        
+        public IEnumerable<RoleProperties> Find(string role)
         {
-            //List<RoleProperties> result = MyList.CommonService.FindAll();
-            foreach (RoleProperties displayItem in MyList)
+            if(!string.IsNullOrWhiteSpace(role))
             {
-                Console.WriteLine("Role: {0}, First name: {1}, Last name: {2}, Age: {3}", displayItem.Role,
-                    displayItem.FirstName, displayItem.LastName, displayItem.Age);
+                return MyList.ToList();
             }
+
+            return MyList.Where(r => r.Role == role);
         }
 
-        public void List()
+        public IEnumerable<RoleProperties> FindAll()
         {
-            foreach(RoleProperties listItem in MyList.Where(item => item.Role != "ceo"))
-            {
-                Console.WriteLine("Role: {0}, First name: {1}, Last name: {2}, Age: {3}", listItem.Role,
-                    listItem.FirstName, listItem.LastName, listItem.Age);
-            }
-        }
-
-        public void RoleNameList()
-        {
-            Console.Write("Enter role name of employees you want to display: ");
-            string roleName = Console.ReadLine();
-
-            foreach(RoleProperties roleNameListItem in MyList.Where(item => item.Role == roleName))
-            {
-                Console.WriteLine("Role: {0}, First name: {1}, Last name: {2}, Age: {3}", roleNameListItem.Role,
-                    roleNameListItem.FirstName, roleNameListItem.LastName, roleNameListItem.Age);
-            }
-            
-        }
-
-        //Ceo search
-        public bool CheckIfCeoExist()
-        {
-            bool ceoExistance;
-            var ceoExistanceCheck=MyList.Where(roles => roles.Role == "ceo").FirstOrDefault();
-            if(ceoExistanceCheck==null)
-            {
-                ceoExistance = false;
-            }
-            else
-            {
-                ceoExistance = true;
-            }
-            return ceoExistance;
+            return MyList.ToList();
         }
 
 

@@ -12,7 +12,7 @@ namespace zadatak1
             uint parsedNumber;
             do
             {
-                Console.WriteLine(messageToDisplay);
+                Console.Write(messageToDisplay);
                 string userInput = Console.ReadLine();
                 isValid = uint.TryParse(userInput, out parsedNumber);
                 if(!isValid)
@@ -33,7 +33,7 @@ namespace zadatak1
 
             do
             {
-                Console.WriteLine(messageToDisplay);
+                Console.Write(messageToDisplay);
                 string userInput = Console.ReadLine();
                 isValid = bool.TryParse(userInput, out parsedInput);
                 if (!isValid)

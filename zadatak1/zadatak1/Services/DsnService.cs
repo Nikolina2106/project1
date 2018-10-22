@@ -6,15 +6,28 @@ namespace zadatak1
 {
     public class DsnService : BaseService<DsnRole>
     {
-        public override void AddSpecific(DsnRole dsnrole)
+        public DsnService() : base("dsn")
         {
-            dsnrole.Role = "dsn";
-            Console.Write("Project: ");
-            dsnrole.Project = Console.ReadLine();
-            dsnrole.CanDraw = Helper.ParseBoolInput("CanDraw: ");
         }
 
-        public override void SpecificDisplay()
+        public override IEnumerable<RoleProperties> DisplayList()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override DsnRole AddSpecific(DsnRole dsnRole)
+        {
+            dsnRole.Role = "dsn";
+            Console.Write("Project: ");
+            dsnRole.Project = Console.ReadLine();
+            dsnRole.CanDraw = Helper.ParseBoolInput("CanDraw: ");
+
+            return dsnRole;
+        }
+
+       
+
+        protected override void DisplaySingle(DsnRole model)
         {
             throw new NotImplementedException();
         }

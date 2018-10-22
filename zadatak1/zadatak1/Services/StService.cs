@@ -6,15 +6,26 @@ namespace zadatak1
 {
     public class StService : BaseService<StRole>
     {
-        public override void AddSpecific(StRole strole)
+        public StService():base("st")
         {
-            strole.Role = "st";
-            Console.Write("Project: ");
-            strole.Project = Console.ReadLine();
-            strole.UsesAutomatedTest = Helper.ParseBoolInput("UsesAutomatedTest: ");
         }
 
-        public override void SpecificDisplay()
+        protected override StRole AddSpecific(StRole stRole)
+        {
+            stRole.Role = "st";
+            Console.Write("Project: ");
+            stRole.Project = Console.ReadLine();
+            stRole.UsesAutomatedTest = Helper.ParseBoolInput("UsesAutomatedTest: ");
+
+            return stRole;
+        }
+
+        public override IEnumerable<RoleProperties> DisplayList()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void DisplaySingle(StRole model)
         {
             throw new NotImplementedException();
         }

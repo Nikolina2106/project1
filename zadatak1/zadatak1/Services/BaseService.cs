@@ -1,13 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace zadatak1
 {
     public abstract class BaseService<T> where T : RoleProperties, new()
     {
+        private readonly string Role;
+        private readonly Storage storage;
 
-        public void Add()
+        protected BaseService(string role)
+        {
+            Role = role;
+        }
+
+        public virtual void Add()
         {
             //model
             T model = new T();
@@ -24,10 +32,22 @@ namespace zadatak1
             
         }
 
-        public abstract void AddSpecific(T item);
-        public abstract void SpecificDisplay();
+        public IEnumerable<T> Find()
+        {
 
-        
+            return Storage.Instance.Find(Role).Cast<T>();
+        }
+
+        protected IEnumerable<RoleProperties> FindAll()
+        {
+            return Storage.Instance.FindAll();
+        }
+
+        protected abstract T AddSpecific(T item);
+        public abstract IEnumerable<RoleProperties> DisplayList();
+        protected abstract void DisplaySingle(T model);
+
+
 
     }
 }

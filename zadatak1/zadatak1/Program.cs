@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 using zadatak1.Services;
 
 namespace zadatak1
@@ -16,9 +17,7 @@ namespace zadatak1
             DsnService dsnService = new DsnService();
             DevService devService = new DevService();
 
-            ListDisplayMethod listDisplayMethod = new ListDisplayMethod();
             CommonService commonService = new CommonService();
-                         
 
             Console.WriteLine("Available commands: Add, Remove, Display, List, <role_name>List, Help, Exit");
             
@@ -29,44 +28,39 @@ namespace zadatak1
                 {
                     Console.Write("Command: ");
                     command = Console.ReadLine();
-                    if(command.ToLower() != "add" && command.ToLower() != "remove" && command.ToLower() != "display" && command.ToLower() != "list" && command.ToLower() != "help"
-                            && command.ToLower() != "pmlist" && command.ToLower() != "ceolist" && command.ToLower() != "stlist" && command.ToLower() != "devlist"
-                            && command.ToLower() != "dsnlist" && command.ToLower() != "exit")
+                    command = command.ToLower();
+                    if (command != "add" && command != "remove" && command != "display" && command != "list" 
+                        && command != "help" && command != "pmlist" && command != "ceolist" && command != "stlist" 
+                        && command != "devlist" && command != "dsnlist" && command != "exit")
                     {
                         Console.WriteLine("Wrong input. Check Help for possible commands.");
                     }
                 }
-                while (command.ToLower() != "add" && command.ToLower() != "remove" && command.ToLower() != "display" && command.ToLower() != "list" && command.ToLower() != "help"
-                            && command.ToLower() != "pmlist" && command.ToLower() != "ceolist" && command.ToLower() != "stlist" && command.ToLower() != "devlist"
-                            && command.ToLower() != "dsnlist" && command.ToLower() != "exit");
+                while (command != "add" && command != "remove" && command !="display" && command != "list" 
+                && command != "help" && command != "pmlist" && command != "ceolist" && command != "stlist" 
+                && command != "devlist" && command != "dsnlist" && command != "exit");
 
                 string role;
             
-                if(command.ToLower() =="add")
+                if(command =="add")
                 {
                     do
                     {
                         Console.Write("Role: ");
                         role = Console.ReadLine();
+                        role = role.ToLower();
 
-                        if(role.ToLower() != "ceo" && role.ToLower() != "pm" && role.ToLower() != "dev" && role.ToLower() != "dsn" && role.ToLower() != "st")
+                        if(role != "ceo" && role != "pm" && role != "dev" && role != "dsn" && role != "st")
                         {
                             Console.WriteLine("Wrong input. Possible roles are: CEO, PM, DEV, DSN and ST.");
                         }
                     }
-                    while (role.ToLower() != "ceo" && role.ToLower() != "pm" && role.ToLower() != "dev" && role.ToLower() != "dsn" && role.ToLower() != "st");
+                    while (role != "ceo" && role != "pm" && role != "dev" && role != "dsn" && role != "st");
 
-                    switch (role.ToLower())
+                    switch (role)
                     {
                         case "ceo":
-                            if(ceoService.SearchCeo()==false)
-                            {
-                                ceoService.Add();
-                            }
-                            else
-                            {
-                                Console.WriteLine("There is already one CEO.");
-                            }
+                            ceoService.Add();
                             break;
                         case "pm":
                             pmService.Add();
@@ -84,7 +78,7 @@ namespace zadatak1
                 
                 }
 
-                else if (command.ToLower() == "help")
+                else if (command == "help")
                 {
                     Console.WriteLine("Available commands: \n" +
                         "Help - displays available commands \n" +
@@ -96,25 +90,43 @@ namespace zadatak1
                         "Exit - used to terminate program \n");
                 }
                 
-                else if (command.ToLower() == "remove")
+                else if (command == "remove")
                 {
                     Console.Write("Enter last name of employee you want to remove from list: ");
                     string removeLastname = Console.ReadLine();
+
                     commonService.Remove(removeLastname);
-                    //display pa remove
                 }
 
-                else if(command.ToLower()=="display")
+                else if(command=="display")
                 {
-                    Storage.Instance.Display();
+                    var displayList = commonService.FindAll();
+
+                    foreach (var item in displayList)
+                    {
+                        Console.WriteLine($"First name: {item.FirstName}, Last name: {item.LastName}, Age: {item.Age}");
+                    }
                 }
 
-                else if(command.ToLower()=="list")
+                else if(command=="list")
                 {
-                    Storage.Instance.List();
+                    var result=commonService.DisplayList();
+                    
+                    if(result.Count()==0)
+                    {
+                        Console.WriteLine("List has no employees.");
+                    }
+                    else
+                    {
+                        foreach (var item in result)
+                        {
+                            Console.WriteLine($"Role: {item.Role}, First name: {item.FirstName}, Last name: {item.LastName}, Age: {item.Age}");
+                        }
+                    }
+                    
                 }
 
-                else if(command.ToLower()=="exit")
+                else if(command=="exit")
                 {
                     return;
                 }
