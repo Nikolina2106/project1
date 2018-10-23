@@ -38,12 +38,7 @@ namespace zadatak1
         
         public IEnumerable<RoleProperties> Find(string role)
         {
-            if(!string.IsNullOrWhiteSpace(role))
-            {
-                return MyList.ToList();
-            }
-
-            return MyList.Where(r => r.Role == role);
+            return MyList.Where(r => r.Role == role).ToList();
         }
 
         public IEnumerable<RoleProperties> FindAll()

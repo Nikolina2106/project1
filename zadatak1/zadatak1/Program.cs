@@ -122,8 +122,63 @@ namespace zadatak1
                         {
                             Console.WriteLine($"Role: {item.Role}, First name: {item.FirstName}, Last name: {item.LastName}, Age: {item.Age}");
                         }
+                    }              
+                }
+
+                else if(command=="ceolist")
+                {
+                    var result= ceoService.DisplaySingle();
+
+                    foreach(var item in result)
+                    {
+                        Console.WriteLine($"Role: {item.Role}, First name: {item.FirstName}, " +
+                            $"Last name: {item.LastName}, Age: {item.Age}, CeoYears: {item.CeoYears}");
                     }
-                    
+                }
+
+                else if (command == "devlist")
+                { 
+                    var result = devService.DisplaySingle();
+
+                    foreach (var item in result)
+                    {
+                        Console.WriteLine($"Role: {item.Role}, First name: {item.FirstName}, Last name: {item.LastName}, " +
+                            $"Age: {item.Age}, Project: {item.Project}, IsStudent: {item.IsStudent}");
+                    }
+                }
+            
+
+                else if (command == "dsnlist")
+                {
+                    var result = dsnService.DisplaySingle();
+
+                    foreach (var item in result)
+                    {
+                        Console.WriteLine($"Role: {item.Role}, First name: {item.FirstName}, Last name: {item.LastName}, " +
+                            $"Age: {item.Age}, Project: {item.Project}, CanDraw: {item.CanDraw}");
+                    }
+                }
+
+                else if (command == "pmlist")
+                {
+                    var result = pmService.DisplaySingle();
+
+                    foreach (var item in result)
+                    {
+                        Console.WriteLine($"Role: {item.Role}, First name: {item.FirstName}, Last name: {item.LastName}, " +
+                            $"Age: {item.Age}, Project: {item.Project}");
+                    }
+                }
+
+                else if (command == "stlist")
+                {
+                    var result = stService.DisplaySingle();
+
+                    foreach (var item in result)
+                    {
+                        Console.WriteLine($"Role: {item.Role}, First name: {item.FirstName}, Last name: {item.LastName}, " +
+                            $"Age: {item.Age}, Project: {item.Project}, UsesAutomatedTest: {item.UsesAutomatedTest}");
+                    }
                 }
 
                 else if(command=="exit")

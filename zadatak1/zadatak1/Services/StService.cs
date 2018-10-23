@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace zadatak1
@@ -25,9 +26,12 @@ namespace zadatak1
             throw new NotImplementedException();
         }
 
-        protected override void DisplaySingle(StRole model)
+        public override IEnumerable<StRole> DisplaySingle()
         {
-            throw new NotImplementedException();
+            var stList = base.FindAll();
+            var result = stList.Where(roles => roles.Role == "st").Cast<StRole>();
+
+            return result;
         }
     }
 }

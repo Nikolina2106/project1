@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace zadatak1
@@ -12,7 +13,7 @@ namespace zadatak1
 
         protected override PmRole AddSpecific(PmRole pmRole)
         {
-            pmRole.Role = "pmrole";
+            pmRole.Role = "pm";
             Console.Write("Project: ");
             pmRole.Project = Console.ReadLine();
 
@@ -24,9 +25,12 @@ namespace zadatak1
             throw new NotImplementedException();
         }
 
-        protected override void DisplaySingle(PmRole model)
+        public override IEnumerable<PmRole> DisplaySingle()
         {
-            throw new NotImplementedException();
+            var pmList = base.FindAll();
+            var result = pmList.Where(roles => roles.Role == "pm").Cast<PmRole>();
+
+            return result;
         }
     }
 }

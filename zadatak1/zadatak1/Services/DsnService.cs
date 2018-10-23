@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace zadatak1
@@ -9,12 +10,7 @@ namespace zadatak1
         public DsnService() : base("dsn")
         {
         }
-
-        public override IEnumerable<RoleProperties> DisplayList()
-        {
-            throw new NotImplementedException();
-        }
-
+        
         protected override DsnRole AddSpecific(DsnRole dsnRole)
         {
             dsnRole.Role = "dsn";
@@ -25,11 +21,20 @@ namespace zadatak1
             return dsnRole;
         }
 
-       
-
-        protected override void DisplaySingle(DsnRole model)
+        public override IEnumerable<RoleProperties> DisplayList()
         {
             throw new NotImplementedException();
         }
+
+        public override IEnumerable<DsnRole> DisplaySingle()
+        {
+            var dsnList = base.FindAll();
+            var result = dsnList.Where(roles => roles.Role == "dsn").Cast<DsnRole>();
+
+            return result;
+        }
+
+
+
     }
 }

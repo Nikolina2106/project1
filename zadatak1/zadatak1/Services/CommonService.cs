@@ -40,7 +40,7 @@ namespace zadatak1.Services
             return result;
         }
 
-        protected override void DisplaySingle(RoleProperties model)
+        public override IEnumerable<RoleProperties> DisplaySingle()
         {
             throw new NotImplementedException();
         }

@@ -38,11 +38,12 @@ namespace zadatak1
             throw new NotImplementedException();
         }
 
-        protected override void DisplaySingle(CeoRole model)
+        public override IEnumerable<CeoRole> DisplaySingle()
         {
-            Console.WriteLine($"{model.LastName} {model.FirstName}, {model.Age}, with {model.CeoYears} " +
-                $"{(model.CeoYears <= 1 ? "year" : "years")} of experiance as CEO");
-        }
+            var ceoList = base.FindAll();
+            var result = ceoList.Where(roles => roles.Role == "ceo").Cast<CeoRole>();
 
+            return result;
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace zadatak1
     public abstract class BaseService<T> where T : RoleProperties, new()
     {
         private readonly string Role;
-        private readonly Storage storage;
+        //private readonly Storage storage;
 
         protected BaseService(string role)
         {
@@ -45,7 +45,7 @@ namespace zadatak1
 
         protected abstract T AddSpecific(T item);
         public abstract IEnumerable<RoleProperties> DisplayList();
-        protected abstract void DisplaySingle(T model);
+        public abstract IEnumerable<T> DisplaySingle();
 
 
 
