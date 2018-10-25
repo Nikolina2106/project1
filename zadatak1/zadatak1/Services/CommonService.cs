@@ -21,12 +21,7 @@ namespace zadatak1.Services
         {
             return base.FindAll();
         }
-
-        public void Get()
-        {
-
-        }
-
+        
         public void Remove(string removeLastName)
         {
             Storage.Instance.Remove(removeLastName);
@@ -44,7 +39,7 @@ namespace zadatak1.Services
         {
             throw new NotImplementedException();
         }
+        
 
-       
     }
 }

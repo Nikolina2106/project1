@@ -46,6 +46,7 @@ namespace zadatak1
         protected abstract T AddSpecific(T item);
         public abstract IEnumerable<RoleProperties> DisplayList();
         public abstract IEnumerable<T> DisplaySingle();
+        
 
 
 

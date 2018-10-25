@@ -18,7 +18,7 @@ namespace zadatak1
             devRole.Project = Console.ReadLine();
             devRole.IsStudent = Helper.ParseBoolInput("IsStudent: ");
 
-            return devRole;          
+            return devRole;
         }
 
         public override IEnumerable<RoleProperties> DisplayList()
@@ -29,9 +29,9 @@ namespace zadatak1
         public override IEnumerable<DevRole> DisplaySingle()
         {
             var devList = base.FindAll();
-            var result= devList.Where(roles => roles.Role == "dev").Cast<DevRole>();
+            var result = devList.Where(roles => roles.Role == "dev").Cast<DevRole>();
 
             return result;
         }
-    }
+    }       
 }

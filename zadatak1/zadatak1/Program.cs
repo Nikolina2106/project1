@@ -31,14 +31,16 @@ namespace zadatak1
                     command = command.ToLower();
                     if (command != "add" && command != "remove" && command != "display" && command != "list" 
                         && command != "help" && command != "pmlist" && command != "ceolist" && command != "stlist" 
-                        && command != "devlist" && command != "dsnlist" && command != "exit")
+                        && command != "devlist" && command != "dsnlist" && command != "exit" && command != "add ceo"
+                && command != "add dev" && command != "add dsn" && command != "add pm" && command != "add st")
                     {
                         Console.WriteLine("Wrong input. Check Help for possible commands.");
                     }
                 }
                 while (command != "add" && command != "remove" && command !="display" && command != "list" 
                 && command != "help" && command != "pmlist" && command != "ceolist" && command != "stlist" 
-                && command != "devlist" && command != "dsnlist" && command != "exit");
+                && command != "devlist" && command != "dsnlist" && command != "exit" && command !="add ceo" 
+                && command != "add dev" && command != "add dsn" && command != "add pm" && command != "add st");
 
                 string role;
             
@@ -78,6 +80,31 @@ namespace zadatak1
                 
                 }
 
+                else if( command == "add ceo")
+                {
+                    ceoService.Add();
+                }
+
+                else if (command == "add dev")
+                {
+                    devService.Add();
+                }
+
+                else if (command == "add dsn")
+                {
+                    dsnService.Add();
+                }
+
+                else if (command == "add pm")
+                {
+                    pmService.Add();
+                }
+
+                else if (command == "add st")
+                {
+                    stService.Add();
+                }
+
                 else if (command == "help")
                 {
                     Console.WriteLine("Available commands: \n" +
@@ -104,7 +131,7 @@ namespace zadatak1
 
                     foreach (var item in displayList)
                     {
-                        Console.WriteLine($"First name: {item.FirstName}, Last name: {item.LastName}, Age: {item.Age}");
+                        Console.WriteLine($"Role: {item.Role}, First name: {item.FirstName}, Last name: {item.LastName}, Age: {item.Age}");
                     }
                 }
 
@@ -185,6 +212,8 @@ namespace zadatak1
                 {
                     return;
                 }
+
+               
 
             }
         }

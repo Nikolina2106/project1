@@ -7,7 +7,7 @@ namespace zadatak1
 {
     public class PmService : BaseService<PmRole>
     {
-        public PmService():base("pm")
+        public PmService() : base("pm")
         {
         }
 
