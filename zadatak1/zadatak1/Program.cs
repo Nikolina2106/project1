@@ -17,7 +17,7 @@ namespace zadatak1
 
             CommonService commonService = new CommonService();
 
-            Console.WriteLine("Available commands: Add, Remove, Display, List, <role_name>List, Help, Exit");
+            Console.WriteLine("Available commands: Add <role name>, Remove, Display, List, <role_name>List, Help, Exit");
             
             while (true)
             {
@@ -40,25 +40,24 @@ namespace zadatak1
                 while (strCommand[0] != "add" && strCommand[0] != "remove" && strCommand[0] != "display" && strCommand[0] != "list"
                         && strCommand[0] != "help" && strCommand[0] != "pmlist" && strCommand[0] != "ceolist" && strCommand[0] != "stlist"
                         && strCommand[0] != "devlist" && strCommand[0] != "dsnlist" && strCommand[0] != "exit");
-
-                string role;
+                
             
                 if(strCommand[0] == "add")
-                {
-                    do
+                {                    
+                    while (strCommand[1] != "ceo" && strCommand[1] != "pm" && strCommand[1] != "dev"
+                            && strCommand[1] != "dsn" && strCommand[1] != "st")
                     {
-                        //Console.Write("Role: ");
-                        //role = Console.ReadLine();
-                        //role = role.ToLower();
+                        Console.Write("Command: ");
+                        command = Console.ReadLine();
+                        command = command.ToLower();
+                        strCommand = command.Split(' ');
 
-                        if(strCommand[1] != "ceo"  && strCommand[1] != "pm" && strCommand[1] != "dev" 
+                        if (strCommand[1] != "ceo" && strCommand[1] != "pm" && strCommand[1] != "dev"
                             && strCommand[1] != "dsn" && strCommand[1] != "st")
                         {
                             Console.WriteLine("Wrong input. Possible roles are: CEO, PM, DEV, DSN and ST.");
                         }
                     }
-                    while (strCommand[1] != "ceo" && strCommand[1] != "pm" && strCommand[1] != "dev"
-                            && strCommand[1] != "dsn" && strCommand[1] != "st");
 
                     switch (strCommand[1])
                     {
@@ -85,7 +84,7 @@ namespace zadatak1
                 {
                     Console.WriteLine("Available commands: \n" +
                         "Help - displays available commands \n" +
-                        "Add – used for adding new employee Remove \n" +
+                        "Add <role name> – used for adding new employee \n" +
                         "Display - used to display all employees(including you!) with their basic info \n" +
                         "List - used to display all employees(excluding you!) with their basic info \n" +
                         "<role_name>List - used to display all emplyees in a role (e.g. PMLIST – displays all project managers)" +
@@ -93,7 +92,7 @@ namespace zadatak1
                         "Exit - used to terminate program \n");
                 }
                 
-                else if (strCommand[0] == "remove")
+                else if (command == "remove")
                 {
                     Console.Write("Enter last name of employee you want to remove from list: ");
                     string removeLastname = Console.ReadLine();
@@ -101,7 +100,7 @@ namespace zadatak1
                     commonService.Remove(removeLastname);
                 }
 
-                else if(strCommand[0] == "display")
+                else if(command == "display")
                 {
                     var displayList = commonService.FindAll();
 
@@ -111,7 +110,7 @@ namespace zadatak1
                     }
                 }
 
-                else if(strCommand[0] == "list")
+                else if(command == "list")
                 {
                     var result=commonService.DisplayList();
                     
@@ -128,7 +127,7 @@ namespace zadatak1
                     }              
                 }
 
-                else if(strCommand[0] == "ceolist")
+                else if(command == "ceolist")
                 {
                     var result= ceoService.DisplaySingle();
 
@@ -139,7 +138,7 @@ namespace zadatak1
                     }
                 }
 
-                else if (strCommand[0] == "devlist")
+                else if (command == "devlist")
                 { 
                     var result = devService.DisplaySingle();
 
@@ -148,10 +147,9 @@ namespace zadatak1
                         Console.WriteLine($"Role: {item.Role}, First name: {item.FirstName}, Last name: {item.LastName}, " +
                             $"Age: {item.Age}, Project: {item.Project}, IsStudent: {item.IsStudent}");
                     }
-                }
-            
+                }            
 
-                else if (strCommand[0] == "dsnlist")
+                else if (command == "dsnlist")
                 {
                     var result = dsnService.DisplaySingle();
 
@@ -162,7 +160,7 @@ namespace zadatak1
                     }
                 }
 
-                else if (strCommand[0] == "pmlist")
+                else if (command == "pmlist")
                 {
                     var result = pmService.DisplaySingle();
 
@@ -173,7 +171,7 @@ namespace zadatak1
                     }
                 }
 
-                else if (strCommand[0] == "stlist")
+                else if (command == "stlist")
                 {
                     var result = stService.DisplaySingle();
 
@@ -184,7 +182,7 @@ namespace zadatak1
                     }
                 }
 
-                else if(strCommand[0] == "exit")
+                else if(command == "exit")
                 {
                     return;
                 }
