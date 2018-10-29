@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using zadatak1.Services;
+using zadatak1.Roles;
 
 namespace zadatak1
 {
@@ -16,71 +17,61 @@ namespace zadatak1
             DevService devService = new DevService();
 
             CommonService commonService = new CommonService();
+                       
+            Console.WriteLine("Available commands: Add <role_name>, Remove, Display, List <role_name>, Help, Exit");
 
-            Console.WriteLine("Available commands: Add <role name>, Remove, Display, List, <role_name>List, Help, Exit");
-            
-            while (true)
+            string[] strCommand = new string[2];
+
+            do
             {
                 string command;
-                string[] strCommand = new string[2];
+
                 do
                 {
                     Console.Write("Command: ");
                     command = Console.ReadLine();
-                    command = command.ToLower();
+                    command = command.ToUpper();
                     strCommand = command.Split(' ');
 
-                    if (strCommand[0] != "add" && strCommand[0] != "remove" && strCommand[0] != "display" && strCommand[0] != "list"
-                        && strCommand[0] != "help" && strCommand[0] != "pmlist" && strCommand[0] != "ceolist" && strCommand[0] != "stlist"
-                        && strCommand[0] != "devlist" && strCommand[0] != "dsnlist" && strCommand[0] != "exit")
+                    if (strCommand[0] != Commands.Add && strCommand[0] != Commands.Remove && strCommand[0] != Commands.Display
+                        && strCommand[0] != Commands.List && strCommand[0] != Commands.Help && strCommand[0] != Commands.Exit)
                     {
                         Console.WriteLine("Wrong input. Check Help for possible commands.");
                     }
                 }
-                while (strCommand[0] != "add" && strCommand[0] != "remove" && strCommand[0] != "display" && strCommand[0] != "list"
-                        && strCommand[0] != "help" && strCommand[0] != "pmlist" && strCommand[0] != "ceolist" && strCommand[0] != "stlist"
-                        && strCommand[0] != "devlist" && strCommand[0] != "dsnlist" && strCommand[0] != "exit");
-                
-            
-                if(strCommand[0] == "add")
-                {                    
-                    while (strCommand[1] != "ceo" && strCommand[1] != "pm" && strCommand[1] != "dev"
-                            && strCommand[1] != "dsn" && strCommand[1] != "st")
+                while (strCommand[0] != Commands.Add && strCommand[0] != Commands.Remove && strCommand[0] != Commands.Display
+                        && strCommand[0] != Commands.List && strCommand[0] != Commands.Help && strCommand[0] != Commands.Exit);
+
+
+                if (strCommand[0] == Commands.Add)
+                {
+                    if (strCommand[1] != PossibleRoles.ceo && strCommand[1] != PossibleRoles.pm
+                            && strCommand[1] != PossibleRoles.dev && strCommand[1] != PossibleRoles.dsn && strCommand[1] != PossibleRoles.st)
                     {
-                        Console.Write("Command: ");
-                        command = Console.ReadLine();
-                        command = command.ToLower();
-                        strCommand = command.Split(' ');
-
-                        if (strCommand[1] != "ceo" && strCommand[1] != "pm" && strCommand[1] != "dev"
-                            && strCommand[1] != "dsn" && strCommand[1] != "st")
-                        {
-                            Console.WriteLine("Wrong input. Possible roles are: CEO, PM, DEV, DSN and ST.");
-                        }
+                        Console.WriteLine("Wrong input. Possible roles are: CEO, PM, DEV, DSN and ST.");
                     }
-
+                    
                     switch (strCommand[1])
                     {
-                        case "ceo":
+                        case PossibleRoles.ceo:
                             ceoService.Add();
                             break;
-                        case "pm":
+                        case PossibleRoles.pm:
                             pmService.Add();
                             break;
-                        case "st":
+                        case PossibleRoles.st:
                             stService.Add();
                             break;
-                        case "dsn":
+                        case PossibleRoles.dsn:
                             dsnService.Add();
                             break;
-                        case "dev":
+                        case PossibleRoles.dev:
                             devService.Add();
                             break;
                     }
-                
-                }                
+                }
 
-                else if (strCommand[0] == "help")
+                else if (strCommand[0] == Commands.Help)
                 {
                     Console.WriteLine("Available commands: \n" +
                         "Help - displays available commands \n" +
@@ -91,8 +82,8 @@ namespace zadatak1
                         "with their full info \n" +
                         "Exit - used to terminate program \n");
                 }
-                
-                else if (command == "remove")
+
+                else if (strCommand[0] == Commands.Remove)
                 {
                     Console.Write("Enter last name of employee you want to remove from list: ");
                     string removeLastname = Console.ReadLine();
@@ -100,7 +91,7 @@ namespace zadatak1
                     commonService.Remove(removeLastname);
                 }
 
-                else if(command == "display")
+                else if (strCommand[0] == Commands.Display)
                 {
                     var displayList = commonService.FindAll();
 
@@ -110,84 +101,37 @@ namespace zadatak1
                     }
                 }
 
-                else if(command == "list")
+                else if (strCommand[0] == Commands.List)
                 {
-                    var result=commonService.DisplayList();
-                    
-                    if(result.Count()==0)
+                    if (strCommand[1] != PossibleRoles.ceo && strCommand[1] != PossibleRoles.pm
+                            && strCommand[1] != PossibleRoles.dev && strCommand[1] != PossibleRoles.dsn && strCommand[1] != PossibleRoles.st)
                     {
-                        Console.WriteLine("List has no employees.");
+                        Console.WriteLine("Wrong input. Possible roles are: CEO, PM, DEV, DSN and ST.");
                     }
-                    else
+                   
+                    switch(strCommand[1])
                     {
-                        foreach (var item in result)
-                        {
-                            Console.WriteLine($"Role: {item.Role}, First name: {item.FirstName}, Last name: {item.LastName}, Age: {item.Age}");
-                        }
-                    }              
-                }
+                        case PossibleRoles.ceo:
+                            ceoService.Find();
+                            break;
+                        case PossibleRoles.dev:
+                            devService.Find();
+                            break;
+                        case PossibleRoles.dsn:
+                            dsnService.Find();
+                            break;
+                        case PossibleRoles.pm:
+                            pmService.Find();
+                            break;
+                        case PossibleRoles.st:
+                            stService.Find();
+                            break;
 
-                else if(command == "ceolist")
-                {
-                    var result= ceoService.DisplaySingle();
 
-                    foreach(var item in result)
-                    {
-                        Console.WriteLine($"Role: {item.Role}, First name: {item.FirstName}, " +
-                            $"Last name: {item.LastName}, Age: {item.Age}, CeoYears: {item.CeoYears}");
-                    }
-                }
-
-                else if (command == "devlist")
-                { 
-                    var result = devService.DisplaySingle();
-
-                    foreach (var item in result)
-                    {
-                        Console.WriteLine($"Role: {item.Role}, First name: {item.FirstName}, Last name: {item.LastName}, " +
-                            $"Age: {item.Age}, Project: {item.Project}, IsStudent: {item.IsStudent}");
-                    }
-                }            
-
-                else if (command == "dsnlist")
-                {
-                    var result = dsnService.DisplaySingle();
-
-                    foreach (var item in result)
-                    {
-                        Console.WriteLine($"Role: {item.Role}, First name: {item.FirstName}, Last name: {item.LastName}, " +
-                            $"Age: {item.Age}, Project: {item.Project}, CanDraw: {item.CanDraw}");
                     }
                 }
-
-                else if (command == "pmlist")
-                {
-                    var result = pmService.DisplaySingle();
-
-                    foreach (var item in result)
-                    {
-                        Console.WriteLine($"Role: {item.Role}, First name: {item.FirstName}, Last name: {item.LastName}, " +
-                            $"Age: {item.Age}, Project: {item.Project}");
-                    }
-                }
-
-                else if (command == "stlist")
-                {
-                    var result = stService.DisplaySingle();
-
-                    foreach (var item in result)
-                    {
-                        Console.WriteLine($"Role: {item.Role}, First name: {item.FirstName}, Last name: {item.LastName}, " +
-                            $"Age: {item.Age}, Project: {item.Project}, UsesAutomatedTest: {item.UsesAutomatedTest}");
-                    }
-                }
-
-                else if(command == "exit")
-                {
-                    return;
-                }
-                
             }
+            while (strCommand[0] != Commands.Exit);
         }
         
                

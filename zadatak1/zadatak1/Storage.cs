@@ -36,14 +36,19 @@ namespace zadatak1
 
         public IEnumerable<RoleProperties> Find(string role)
         {
-            return MyList.Where(r => r.Role == role).ToList();
+            if(!string.IsNullOrEmpty(role))
+            { 
+                return MyList.Where(r => r.Role == role).ToList();
+            }
+
+            return MyList.Where(r => r.Role != "ceo");
         }
 
         public IEnumerable<RoleProperties> FindAll()
         {
             return MyList.ToList();
         }
-        
+
 
 
 

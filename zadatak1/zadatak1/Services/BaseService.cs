@@ -8,7 +8,6 @@ namespace zadatak1
     public abstract class BaseService<T> where T : RoleProperties, new()
     {
         private readonly string Role;
-        //private readonly Storage storage;
 
         protected BaseService(string role)
         {
@@ -17,7 +16,6 @@ namespace zadatak1
 
         public virtual void Add()
         {
-            //model
             T model = new T();
             
             Console.Write("First name: ");
@@ -34,8 +32,13 @@ namespace zadatak1
 
         public IEnumerable<T> Find()
         {
+            var result=Storage.Instance.Find(Role).Cast<T>();
 
-            return Storage.Instance.Find(Role).Cast<T>();
+            if(result != null && result.Any())
+            {
+                DisplayList(result);
+            }
+            return result;
         }
 
         protected IEnumerable<RoleProperties> FindAll()
@@ -44,8 +47,8 @@ namespace zadatak1
         }
 
         protected abstract T AddSpecific(T item);
-        public abstract IEnumerable<RoleProperties> DisplayList();
-        public abstract IEnumerable<T> DisplaySingle();
+        public abstract void DisplayList(IEnumerable<T> list);
+        public abstract void DisplaySingle(T model);
         
 
 

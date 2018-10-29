@@ -21,25 +21,20 @@ namespace zadatak1.Services
         {
             return base.FindAll();
         }
-        
+
         public void Remove(string removeLastName)
         {
             Storage.Instance.Remove(removeLastName);
         }
-
-        public override IEnumerable<RoleProperties> DisplayList()
-        {
-            var listWithCeo=base.FindAll();
-            var result= listWithCeo.Where(roles => roles.Role != "ceo");
-
-            return result;
-        }
-
-        public override IEnumerable<RoleProperties> DisplaySingle()
+        
+        public override void DisplayList(IEnumerable<RoleProperties> list)
         {
             throw new NotImplementedException();
         }
-        
 
+        public override void DisplaySingle(RoleProperties model)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

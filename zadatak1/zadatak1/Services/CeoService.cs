@@ -33,19 +33,23 @@ namespace zadatak1
             return ceoRole;
         }
 
-        public override IEnumerable<RoleProperties> DisplayList()
+        public override void DisplayList(IEnumerable<CeoRole> list)
         {
-            throw new NotImplementedException();
+            foreach (var item in list)
+            {
+                DisplaySingle(item);
+            }
+            if(list==null)
+            {
+                Console.WriteLine("List is empty.");
+            }
         }
 
-        public override IEnumerable<CeoRole> DisplaySingle()
+        public override void DisplaySingle(CeoRole model)
         {
-            var ceoList = base.FindAll();
-            var result = ceoList.Where(roles => roles.Role == "ceo").Cast<CeoRole>();
-
-            return result;
+            Console.WriteLine($"Role: {model.Role}, First name: {model.FirstName}, Last name: {model.LastName}, Age: {model.Age}, " +
+                $"CeoYears: {model.CeoYears}");
         }
-
-        
     }
 }
+

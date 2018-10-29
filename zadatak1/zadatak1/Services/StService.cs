@@ -21,17 +21,19 @@ namespace zadatak1
             return stRole;
         }
 
-        public override IEnumerable<RoleProperties> DisplayList()
+        public override void DisplayList(IEnumerable<StRole> list)
         {
-            throw new NotImplementedException();
+            foreach (var item in list)
+            {
+                DisplaySingle(item);
+            }
+
         }
 
-        public override IEnumerable<StRole> DisplaySingle()
+        public override void DisplaySingle(StRole model)
         {
-            var stList = base.FindAll();
-            var result = stList.Where(roles => roles.Role == "st").Cast<StRole>();
-
-            return result;
+            Console.WriteLine($"Role: {model.Role}, First name: {model.FirstName}, Last name: {model.LastName}, Age: {model.Age}, " +
+                $"Project: {model.Project}");
         }
         
     }
