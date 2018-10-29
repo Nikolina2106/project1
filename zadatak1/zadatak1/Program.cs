@@ -68,6 +68,9 @@ namespace zadatak1
                         case PossibleRoles.dev:
                             devService.Add();
                             break;
+                        case null:
+                            Console.WriteLine("Enter role.");
+                            break;
                     }
                 }
 
@@ -101,6 +104,14 @@ namespace zadatak1
                     }
                 }
 
+                else if(strCommand[0]==Commands.List)
+                {
+                    devService.Find();
+                    dsnService.Find();
+                    pmService.Find();
+                    stService.Find();
+                }
+
                 else if (strCommand[0] == Commands.List)
                 {
                     if (strCommand[1] != PossibleRoles.ceo && strCommand[1] != PossibleRoles.pm
@@ -126,8 +137,9 @@ namespace zadatak1
                         case PossibleRoles.st:
                             stService.Find();
                             break;
-
-
+                        default:
+                            Console.WriteLine("asgf");
+                            break;
                     }
                 }
             }

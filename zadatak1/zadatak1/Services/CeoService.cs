@@ -39,10 +39,6 @@ namespace zadatak1
             {
                 DisplaySingle(item);
             }
-            if(list==null)
-            {
-                Console.WriteLine("List is empty.");
-            }
         }
 
         public override void DisplaySingle(CeoRole model)
