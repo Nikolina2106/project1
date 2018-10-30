@@ -20,38 +20,38 @@ namespace zadatak1
                        
             Console.WriteLine("Available commands: Add <role_name>, Remove, Display, List <role_name>, Help, Exit");
 
+            string command;
+            string role;
             string[] strCommand = new string[2];
 
             do
             {
-                string command;
-
+                
+                var valid = false;
+                
                 do
                 {
                     Console.Write("Command: ");
                     command = Console.ReadLine();
-                    command = command.ToUpper();
                     strCommand = command.Split(' ');
-
-                    if (strCommand[0] != Commands.Add && strCommand[0] != Commands.Remove && strCommand[0] != Commands.Display
-                        && strCommand[0] != Commands.List && strCommand[0] != Commands.Help && strCommand[0] != Commands.Exit)
-                    {
-                        Console.WriteLine("Wrong input. Check Help for possible commands.");
-                    }
+                    valid = CommandValidator.IsValidCommand(strCommand[0]);
+                    command = command.ToUpper();                                       
                 }
-                while (strCommand[0] != Commands.Add && strCommand[0] != Commands.Remove && strCommand[0] != Commands.Display
-                        && strCommand[0] != Commands.List && strCommand[0] != Commands.Help && strCommand[0] != Commands.Exit);
+                while (!valid);
 
-
-                if (strCommand[0] == Commands.Add)
+                //add
+                if (command==Commands.Add)
                 {
-                    if (strCommand[1] != PossibleRoles.ceo && strCommand[1] != PossibleRoles.pm
-                            && strCommand[1] != PossibleRoles.dev && strCommand[1] != PossibleRoles.dsn && strCommand[1] != PossibleRoles.st)
+                    do
                     {
-                        Console.WriteLine("Wrong input. Possible roles are: CEO, PM, DEV, DSN and ST.");
+                        Console.Write("Role: ");
+                        role = Console.ReadLine();
+                        valid = RoleValidator.IsValidRole(role);
+                        role=role.ToUpper();
                     }
-                    
-                    switch (strCommand[1])
+                    while (!valid);
+
+                    switch (role)
                     {
                         case PossibleRoles.ceo:
                             ceoService.Add();
@@ -68,13 +68,41 @@ namespace zadatak1
                         case PossibleRoles.dev:
                             devService.Add();
                             break;
-                        case null:
-                            Console.WriteLine("Enter role.");
+                    }
+                }
+
+                //add <role_name>
+                else if (strCommand[0] == Commands.Add)
+                {
+                    do
+                    {
+                        //strCommand = command.Split(' ');
+                        valid = RoleValidator.IsValidRole(strCommand[1]);
+                        role = strCommand[1];
+                    }
+                    while (!valid);
+
+                    switch (role)
+                    {
+                        case PossibleRoles.ceo:
+                            ceoService.Add();
+                            break;
+                        case PossibleRoles.pm:
+                            pmService.Add();
+                            break;
+                        case PossibleRoles.st:
+                            stService.Add();
+                            break;
+                        case PossibleRoles.dsn:
+                            dsnService.Add();
+                            break;
+                        case PossibleRoles.dev:
+                            devService.Add();
                             break;
                     }
                 }
 
-                else if (strCommand[0] == Commands.Help)
+                else if (command == Commands.Help)
                 {
                     Console.WriteLine("Available commands: \n" +
                         "Help - displays available commands \n" +
@@ -86,7 +114,7 @@ namespace zadatak1
                         "Exit - used to terminate program \n");
                 }
 
-                else if (strCommand[0] == Commands.Remove)
+                else if (command == Commands.Remove)
                 {
                     Console.Write("Enter last name of employee you want to remove from list: ");
                     string removeLastname = Console.ReadLine();
@@ -94,7 +122,7 @@ namespace zadatak1
                     commonService.Remove(removeLastname);
                 }
 
-                else if (strCommand[0] == Commands.Display)
+                else if (command == Commands.Display)
                 {
                     var displayList = commonService.FindAll();
 
@@ -104,7 +132,7 @@ namespace zadatak1
                     }
                 }
 
-                else if(strCommand[0]==Commands.List)
+                else if(command==Commands.List)
                 {
                     devService.Find();
                     dsnService.Find();
@@ -112,38 +140,35 @@ namespace zadatak1
                     stService.Find();
                 }
 
-                else if (strCommand[0] == Commands.List)
-                {
-                    if (strCommand[1] != PossibleRoles.ceo && strCommand[1] != PossibleRoles.pm
-                            && strCommand[1] != PossibleRoles.dev && strCommand[1] != PossibleRoles.dsn && strCommand[1] != PossibleRoles.st)
-                    {
-                        Console.WriteLine("Wrong input. Possible roles are: CEO, PM, DEV, DSN and ST.");
-                    }
+                //else if (strCommand[0] == Commands.List)
+                //{
+                //    if (strCommand[1] != PossibleRoles.ceo && strCommand[1] != PossibleRoles.pm
+                //            && strCommand[1] != PossibleRoles.dev && strCommand[1] != PossibleRoles.dsn && strCommand[1] != PossibleRoles.st)
+                //    {
+                //        Console.WriteLine("Wrong input. Possible roles are: CEO, PM, DEV, DSN and ST.");
+                //    }
                    
-                    switch(strCommand[1])
-                    {
-                        case PossibleRoles.ceo:
-                            ceoService.Find();
-                            break;
-                        case PossibleRoles.dev:
-                            devService.Find();
-                            break;
-                        case PossibleRoles.dsn:
-                            dsnService.Find();
-                            break;
-                        case PossibleRoles.pm:
-                            pmService.Find();
-                            break;
-                        case PossibleRoles.st:
-                            stService.Find();
-                            break;
-                        default:
-                            Console.WriteLine("asgf");
-                            break;
-                    }
-                }
+                //    switch(strCommand[1])
+                //    {
+                //        case PossibleRoles.ceo:
+                //            ceoService.Find();
+                //            break;
+                //        case PossibleRoles.dev:
+                //            devService.Find();
+                //            break;
+                //        case PossibleRoles.dsn:
+                //            dsnService.Find();
+                //            break;
+                //        case PossibleRoles.pm:
+                //            pmService.Find();
+                //            break;
+                //        case PossibleRoles.st:
+                //            stService.Find();
+                //            break;
+                //    }
+                //}
             }
-            while (strCommand[0] != Commands.Exit);
+            while (command != Commands.Exit);
         }
         
                
