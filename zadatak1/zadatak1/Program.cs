@@ -25,17 +25,16 @@ namespace zadatak1
             string[] strCommand = new string[2];
 
             do
-            {
-                
+            {                
                 var valid = false;
-                
+
                 do
                 {
                     Console.Write("Command: ");
                     command = Console.ReadLine();
+                    command = command.ToUpper();
                     strCommand = command.Split(' ');
-                    valid = CommandValidator.IsValidCommand(strCommand[0]);
-                    command = command.ToUpper();                                       
+                    valid = CommandValidator.IsValidCommand(command);                                                          
                 }
                 while (!valid);
 
@@ -71,19 +70,20 @@ namespace zadatak1
                     }
                 }
 
-                //add <role_name>
-                else if (strCommand[0] == Commands.Add)
-                {
-                    do
+                //add <role_name> nad list <role_name>
+                if(strCommand.Length>1)
+                {                    
+                    if (strCommand[0] == Commands.Add)
                     {
-                        //strCommand = command.Split(' ');
-                        valid = RoleValidator.IsValidRole(strCommand[1]);
-                        role = strCommand[1];
-                    }
-                    while (!valid);
+                        do
+                        {
+                            role = strCommand[1];
+                            valid = RoleValidator.IsValidRole(role);                            
+                        }
+                        while (!valid);
 
-                    switch (role)
-                    {
+                        switch (role)
+                        {
                         case PossibleRoles.ceo:
                             ceoService.Add();
                             break;
@@ -99,9 +99,38 @@ namespace zadatak1
                         case PossibleRoles.dev:
                             devService.Add();
                             break;
+                        }
+                    }
+
+                    else if (strCommand[0] == Commands.List)
+                    {
+                        do
+                        {
+                            role = strCommand[1];
+                            valid = RoleValidator.IsValidRole(role);
+                        }
+                        while (!valid);
+
+                        switch (role)
+                        {
+                            case PossibleRoles.ceo:
+                                ceoService.Find();
+                                break;
+                            case PossibleRoles.dev:
+                                devService.Find();
+                                break;
+                            case PossibleRoles.dsn:
+                                dsnService.Find();
+                                break;
+                            case PossibleRoles.pm:
+                                pmService.Find();
+                                break;
+                            case PossibleRoles.st:
+                                stService.Find();
+                                break;
+                        }
                     }
                 }
-
                 else if (command == Commands.Help)
                 {
                     Console.WriteLine("Available commands: \n" +
@@ -139,34 +168,6 @@ namespace zadatak1
                     pmService.Find();
                     stService.Find();
                 }
-
-                //else if (strCommand[0] == Commands.List)
-                //{
-                //    if (strCommand[1] != PossibleRoles.ceo && strCommand[1] != PossibleRoles.pm
-                //            && strCommand[1] != PossibleRoles.dev && strCommand[1] != PossibleRoles.dsn && strCommand[1] != PossibleRoles.st)
-                //    {
-                //        Console.WriteLine("Wrong input. Possible roles are: CEO, PM, DEV, DSN and ST.");
-                //    }
-                   
-                //    switch(strCommand[1])
-                //    {
-                //        case PossibleRoles.ceo:
-                //            ceoService.Find();
-                //            break;
-                //        case PossibleRoles.dev:
-                //            devService.Find();
-                //            break;
-                //        case PossibleRoles.dsn:
-                //            dsnService.Find();
-                //            break;
-                //        case PossibleRoles.pm:
-                //            pmService.Find();
-                //            break;
-                //        case PossibleRoles.st:
-                //            stService.Find();
-                //            break;
-                //    }
-                //}
             }
             while (command != Commands.Exit);
         }

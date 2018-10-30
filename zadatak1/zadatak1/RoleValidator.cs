@@ -20,7 +20,6 @@ namespace zadatak1
             {
                 Console.WriteLine("Wrong input. Possible roles are: CEO, PM, DEV, DSN and ST.");
             }
-
             return valid;
         }
     }
